@@ -5,8 +5,6 @@ window.onload = () => {};
 //   button.addEventListener("click", alert("clicked"))
 // );
 
-let searchFieldValue = document.querySelector("#searchField").value;
-
 function hideCard(e) {
   document.querySelectorAll(".card")[e].style.display = "none";
 }
@@ -18,9 +16,11 @@ const loadPictures = async () => {
   createCard(parsedJSON.images);
 };
 const loadSecondaryPictures = async () => {
+  let searchFieldValue = document.querySelector("#searchField").value;
+  console.log(searchFieldValue);
   if (searchFieldValue !== "") {
     const response = await fetch(
-      `http://www.splashbase.co/api/v1/images/${searchFieldValue}`
+      `http://www.splashbase.co/api/v1/images/search?query=${searchFieldValue}`
     );
     const parsedJSON = await response.json();
     console.log(parsedJSON);
