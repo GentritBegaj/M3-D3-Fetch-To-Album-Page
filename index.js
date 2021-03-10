@@ -5,6 +5,8 @@ window.onload = () => {};
 //   button.addEventListener("click", alert("clicked"))
 // );
 
+let searchFieldValue = document.querySelector("#searchField").value;
+
 function hideCard(e) {
   document.querySelectorAll(".card")[e].style.display = "none";
 }
@@ -14,6 +16,16 @@ const loadPictures = async () => {
   const parsedJSON = await response.json();
   console.log(parsedJSON);
   createCard(parsedJSON.images);
+};
+const loadSecondaryPictures = async () => {
+  if (searchFieldValue !== "") {
+    const response = await fetch(
+      `http://www.splashbase.co/api/v1/images/${searchFieldValue}`
+    );
+    const parsedJSON = await response.json();
+    console.log(parsedJSON);
+    createCard(parsedJSON.images);
+  } else return;
 };
 
 const createCard = async (data) => {
@@ -32,10 +44,30 @@ const createCard = async (data) => {
                     <div class="btn-group">
                       <button
                         type="button"
-                        class="btn btn-sm btn-outline-secondary"
+                        class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModal"
+                        
                       >
                         View
                       </button>
+                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <img src="${item.url}" class="img-fluid"  alt="" >
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                       <button
                         type="button"
                         class="btn btn-sm btn-outline-secondary"
