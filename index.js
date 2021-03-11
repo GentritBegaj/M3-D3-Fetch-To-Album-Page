@@ -1,4 +1,3 @@
-
 function hideCard(e) {
   document.querySelectorAll(".card")[e].style.display = "none";
 }
@@ -66,7 +65,7 @@ const createCard = async (data) => {
     button.setAttribute("data-toggle", "modal");
     button.setAttribute("data-target", "#exampleModal");
   });
-
+};
 
 const showModal = (e) => {
   let card = e.target.closest(".card");
@@ -77,7 +76,6 @@ const showModal = (e) => {
   ).innerHTML = `<img src="${image.src}"  class="img-fluid" alt="">`;
 };
 
-
 function hide(e) {
   console.log(e.target);
   const card = e.target.closest(".card");
@@ -87,9 +85,9 @@ function hide(e) {
   setTimeout(() => {
     col.remove();
   }, 500);
-  }
-  
-  const addPicsToCarousel = async (data) => {
+}
+
+const addPicsToCarousel = async (data) => {
   document.querySelector(".carousel").classList.remove("d-none");
   let carouselInner = document.querySelector(".carousel-inner");
   data.images.forEach((item, idx) => {
